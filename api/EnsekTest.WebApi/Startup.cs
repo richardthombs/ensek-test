@@ -38,6 +38,8 @@ namespace EnsekTest.WebApi
 			var builderAction = new MeterReadingContextFactory().GetDbContextOptionsBuildAction(databaseConfig);
 			services.AddDbContext<MeterReadingContext>(builderAction);
 
+			services.AddCors();
+
 			services.AddControllers(x => x.Filters.Add<SaveDatabaseChangesActionFilter>())
 				.AddNewtonsoftJson(x =>
 				{
@@ -62,6 +64,12 @@ namespace EnsekTest.WebApi
 			}
 
 			app.UseRouting();
+
+			app.UseCors(x => x
+				.AllowAnyOrigin()
+				.AllowAnyMethod()
+				.AllowAnyHeader()
+			);
 
 			app.UseAuthorization();
 
