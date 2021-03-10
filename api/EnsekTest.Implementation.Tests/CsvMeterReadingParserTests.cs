@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Linq;
 
 using NUnit.Framework;
@@ -7,7 +6,7 @@ namespace EnsekTest.Implementation.Tests
 {
 	public class CsvMeterReadingParserTests
 	{
-		[TestCase("2344,22/04/2019 09:24,1002")]
+		[TestCase("2344,22/04/2019 09:24,01002")]
 		[TestCase("2233,22/04/2019 12:25,00323")]
 		[TestCase("8766,22/04/2019 12:25,03440")]
 		[TestCase("2344,22/04/2019 12:25,01002")]

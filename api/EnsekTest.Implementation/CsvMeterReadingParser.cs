@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace EnsekTest.Implementation
 {
 	public class CsvMeterReadingParser : IMeterReadingParser
 	{
+		static Regex meterReadPattern = new Regex("^\\d{5,5}$");
+
 		public List<SubmittedMeterReading> Parse(string csvContent)
 		{
 			var result = new List<SubmittedMeterReading>();
@@ -36,24 +39,20 @@ namespace EnsekTest.Implementation
 			var fields = line.Split(",");
 			if (fields.Length == 3)
 			{
-				try
-				{
-					var accountId = Int32.Parse(fields[0], CultureInfo.InvariantCulture);
-					var dateTime = DateTime.ParseExact(fields[1], "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
-					var meterReading = Int32.Parse(fields[2], CultureInfo.InvariantCulture);
+				var accountId = ParseAccountId(fields[0]);
+				var dateTime = ParseReadingDate(fields[1]);
+				var meterReading = ParseMeterReading(fields[2]);
 
+				if (accountId != null && dateTime != null && meterReading != null)
+				{
 					reading.ParsedReading = new MeterReading
 					{
-						AccountId = accountId,
-						MeterReadingDateTime = dateTime,
-						MeterReadValue = meterReading
+						AccountId = accountId.Value,
+						MeterReadingDateTime = dateTime.Value,
+						MeterReadValue = meterReading.Value,
 					};
 
-					reading.Valid = IsReadingValid(reading.ParsedReading);
-				}
-				catch (FormatException)
-				{
-					reading.Valid = false;
+					reading.Valid = true;
 				}
 			}
 
@@ -64,6 +63,31 @@ namespace EnsekTest.Implementation
 		{
 			if (reading.MeterReadValue < 0 || reading.MeterReadValue > 99999) return false;
 			return true;
+		}
+
+		int? ParseAccountId(string str)
+		{
+			int accountId;
+			if (Int32.TryParse(str, out accountId)) return accountId;
+			return null;
+		}
+
+		DateTime? ParseReadingDate(string str)
+		{
+			try
+			{
+				return DateTime.ParseExact(str, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+			}
+			catch (FormatException)
+			{
+				return null;
+			}
+		}
+
+		int? ParseMeterReading(string reading)
+		{
+			if (!meterReadPattern.IsMatch(reading)) return null;
+			return Int32.Parse(reading);
 		}
 	}
 }
