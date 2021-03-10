@@ -24,7 +24,7 @@ namespace EnsekTest.Integrations.EntityFramework
 			var existing = db.MeterReadings.FirstOrDefault(x =>
 				x.AccountId == reading.AccountId &&
 				x.MeterReadingDateTime == reading.MeterReadingDateTime &&
-				x.MeterReadValue == x.MeterReadValue
+				x.MeterReadValue == reading.MeterReadValue
 			);
 
 			return (existing != null);
