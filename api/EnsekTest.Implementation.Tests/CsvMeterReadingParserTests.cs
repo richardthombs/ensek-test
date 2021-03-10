@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Linq;
 
@@ -67,19 +66,6 @@ namespace EnsekTest.Implementation.Tests
 
 			// Assert
 			Assert.AreEqual(1, result.Count(x => !x.Valid));
-		}
-	}
-
-	public class MeterReadingUploadServiceTests
-	{
-		public void Valid_Readings_Are_Uploaded()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Invalid_Readings_Are_Not_Uploaded()
-		{
-			throw new NotImplementedException();
 		}
 	}
 }
