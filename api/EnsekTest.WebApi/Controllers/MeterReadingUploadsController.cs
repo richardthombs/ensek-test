@@ -21,11 +21,18 @@ namespace EnsekTest.WebApi.Controllers
 			this.uploadSvc = uploadSvc;
 		}
 
+		[HttpPost]
 		public IActionResult Post([FromBody] string csv)
 		{
 			var readings = parser.Parse(csv);
 			readings = uploadSvc.Upload(readings);
-			return Ok(readings.Valid.Count);
+
+			return Ok(new
+			{
+				validCount = readings.Count(x => x.Uploaded),
+				invalidCount = readings.Count(x => !x.Uploaded),
+				results = readings
+			});
 		}
 	}
 }

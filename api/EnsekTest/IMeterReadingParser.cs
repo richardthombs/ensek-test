@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Generic;
+
 namespace EnsekTest
 {
 	public interface IMeterReadingParser
 	{
-		ParsedMeterReadings Parse(string csvContent);
+		List<SubmittedMeterReading> Parse(string csvContent);
 	}
 }

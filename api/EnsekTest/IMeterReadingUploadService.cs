@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Generic;
+
 namespace EnsekTest
 {
 	public interface IMeterReadingUploadService
 	{
-		ParsedMeterReadings Upload(ParsedMeterReadings readings);
+		List<SubmittedMeterReading> Upload(List<SubmittedMeterReading> readings);
 	}
 }

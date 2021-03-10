@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Linq;
 
 using NUnit.Framework;
 
@@ -43,8 +45,7 @@ namespace EnsekTest.Implementation.Tests
 			var result = parser.Parse(line);
 
 			// Assert
-			Assert.AreEqual(1, result.Valid.Count);
-			Assert.AreEqual(0, result.Invalid.Count);
+			Assert.AreEqual(1, result.Count(x => x.Valid));
 		}
 
 		[TestCase("2346,22/04/2019 12:25,999999")]
@@ -65,8 +66,7 @@ namespace EnsekTest.Implementation.Tests
 			var result = parser.Parse(line);
 
 			// Assert
-			Assert.AreEqual(0, result.Valid.Count);
-			Assert.AreEqual(1, result.Invalid.Count);
+			Assert.AreEqual(1, result.Count(x => !x.Valid));
 		}
 	}
 
