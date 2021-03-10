@@ -1,9 +1,8 @@
-using System;
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace EnsekTest
+namespace EnsekTest.WebApi
 {
 	public class Program
 	{

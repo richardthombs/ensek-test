@@ -5,13 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\EnsekTest\EnsekTest.csproj" />
     <ProjectReference Include="..\EnsekTest.Integrations.EntityFramework\EnsekTest.Integrations.EntityFramework.csproj" />
+    <ProjectReference Include="..\EnsekTest.Implementation\EnsekTest.Implementation.csproj" />
   </ItemGroup>
 
 </Project>

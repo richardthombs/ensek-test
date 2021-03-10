@@ -8,6 +8,11 @@ namespace EnsekTest.Integrations.EntityFramework
 	{
 		MeterReadingContext db;
 
+		public MeterReadingRepository(MeterReadingContext db)
+		{
+			this.db = db;
+		}
+
 		public MeterReading Create(MeterReading reading)
 		{
 			db.MeterReadings.Add(reading);
