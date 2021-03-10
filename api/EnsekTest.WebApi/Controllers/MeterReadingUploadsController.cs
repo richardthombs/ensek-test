@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace EnsekTest.WebApi.Controllers
 {
 	[ApiController]
-	[Route("meter-reading-uploads")]
+	[Route("api/meter-reading-uploads")]
 	public class MeterReadingUploadsController : ControllerBase
 	{
 		IMeterReadingParser parser;

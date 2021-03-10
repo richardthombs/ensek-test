@@ -15,7 +15,7 @@ export default function Home() {
   function handleUpload(e) {
     setUploadEnabled(false);
 
-    axios.post("http://localhost:5000/meter-reading-uploads", csv, { headers: { "content-type": "text/csv" } })
+    axios.post("https://ensek.gearstone.uk/api/meter-reading-uploads", csv, { headers: { "content-type": "text/csv" } })
       .then(x => {
         setResults(x.data);
         setError(null);
