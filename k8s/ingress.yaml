@@ -15,7 +15,7 @@ spec:
     - ensek.gearstone.uk
     secretName: ensek-tls
   rules:
-  - host: ensek.app
+  - host: ensek.gearstone.uk
     http:
       paths:
       - path: /
