@@ -24,6 +24,12 @@ namespace EnsekTest.Integrations.EntityFramework
 						.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery)
 					);
 
+				case DatabaseProvider.Sqlite:
+					return builder.UseSqlite(config.ConnectionString, options => options
+							.MigrationsAssembly(MigrationsAssemblyName)
+							.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery)
+					);
+
 				default: throw new NotSupportedException(config.Provider.ToString());
 			}
 		}

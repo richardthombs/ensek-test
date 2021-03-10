@@ -11,17 +11,4 @@ namespace EnsekTest
 
 		public IEnumerable<MeterReading> MeterReadings { get; set; }
 	}
-
-	public class DatabaseConfiguration
-	{
-		public string ConnectionString { get; set; }
-		public DatabaseProvider Provider { get; set; }
-		public bool EnableMigrations { get; set; }
-	}
-
-	public enum DatabaseProvider
-	{
-		SqlServer,
-		Npgsql
-	}
 }
