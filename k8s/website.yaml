@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: ensek-website
-        image: docker.pkg.github.com/gearstone/ensek.app/ensek-website:latest
+        image: docker.pkg.github.com/richardthombs/ensek-test/ensek-website:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80

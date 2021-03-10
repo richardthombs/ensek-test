@@ -12,8 +12,7 @@ metadata:
 spec:
   tls:
   - hosts:
-    - ensek.app
-    - www.ensek.app
+    - ensek.gearstone.uk
     secretName: ensek-tls
   rules:
   - host: ensek.app
