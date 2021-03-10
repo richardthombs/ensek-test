@@ -12,18 +12,6 @@ namespace EnsekTest.Integrations.EntityFramework
 		{
 			switch (config.Provider)
 			{
-				case DatabaseProvider.SqlServer:
-					return builder.UseSqlServer(config.ConnectionString, options => options
-						.MigrationsAssembly(MigrationsAssemblyName)
-						.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery)
-					);
-
-				case DatabaseProvider.Npgsql:
-					return builder.UseNpgsql(config.ConnectionString, options => options
-						.MigrationsAssembly(MigrationsAssemblyName)
-						.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery)
-					);
-
 				case DatabaseProvider.Sqlite:
 					return builder.UseSqlite(config.ConnectionString, options => options
 							.MigrationsAssembly(MigrationsAssemblyName)
