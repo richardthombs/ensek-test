@@ -3,14 +3,16 @@ using System;
 using EnsekTest.Integrations.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EnsekTest.WebApi.Migrations
 {
     [DbContext(typeof(MeterReadingContext))]
-    partial class MeterReadingContextModelSnapshot : ModelSnapshot
+    [Migration("20210311075246_v002")]
+    partial class v002
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
