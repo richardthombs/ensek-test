@@ -1,11 +1,49 @@
+using System;
 using System.Linq;
 
 using NUnit.Framework;
 
 namespace EnsekTest.Implementation.Tests
 {
-	public class CsvMeterReadingParserTests
+	public class CsvFileParserTests
 	{
+		[Test]
+		public void File_Is_Parsed_Correctly()
+		{
+			// Arrange
+			var file = "2344,22/04/2019 09:24,01002\n2349,22/04/2019 12:25,VOID";
+			var parser = new CsvFileParser(new CsvLineParser());
+
+			// Act
+			var parsed = parser.Parse(file);
+
+			// Assert
+			Assert.AreEqual(2, parsed.Count);
+			Assert.AreEqual(true, parsed[0].Valid);
+			Assert.IsNotNull(parsed[0].ParsedReading);
+			Assert.AreEqual(1, parsed[0].LineNumber);
+
+			Assert.AreEqual(false, parsed[1].Valid);
+			Assert.IsNull(parsed[1].ParsedReading);
+			Assert.AreEqual(2, parsed[1].LineNumber);
+		}
+	}
+
+	public class CsvLineParserTests
+	{
+		[Test]
+		public void Line_Is_Parsed_Correctly()
+		{
+			var line = "2344,22/04/2019 09:24,01002";
+
+			var parser = new CsvLineParser();
+			var parsed = parser.Parse(line);
+
+			Assert.AreEqual(2344, parsed.AccountId);
+			Assert.AreEqual(new DateTime(2019, 4, 22, 09, 24, 00), parsed.MeterReadingDateTime.DateTime);
+			Assert.AreEqual(1002, parsed.MeterReadValue);
+		}
+
 		[TestCase("2344,22/04/2019 09:24,01002")]
 		[TestCase("2233,22/04/2019 12:25,00323")]
 		[TestCase("8766,22/04/2019 12:25,03440")]
@@ -37,13 +75,13 @@ namespace EnsekTest.Implementation.Tests
 		public void Valid_Lines_Are_Accepted(string line)
 		{
 			// Arrange
-			var parser = new CsvMeterReadingParser();
+			var parser = new CsvLineParser();
 
 			// Act
 			var result = parser.Parse(line);
 
 			// Assert
-			Assert.AreEqual(1, result.Count(x => x.Valid));
+			Assert.IsNotNull(result);
 		}
 
 		[TestCase("2346,22/04/2019 12:25,999999")]
@@ -58,13 +96,13 @@ namespace EnsekTest.Implementation.Tests
 		public void Invalid_Lines_Are_Rejected(string line)
 		{
 			// Arrange
-			var parser = new CsvMeterReadingParser();
+			var parser = new CsvLineParser();
 
 			// Act
 			var result = parser.Parse(line);
 
 			// Assert
-			Assert.AreEqual(1, result.Count(x => !x.Valid));
+			Assert.IsNull(result);
 		}
 	}
 }

@@ -52,7 +52,8 @@ namespace EnsekTest.WebApi
 			services.AddTransient<IAccountsRepository, AccountsRepository>();
 			services.AddTransient<IMeterReadingsRepository, MeterReadingRepository>();
 			services.AddTransient<IMeterReadingUploadService, MeterReadingUploadService>();
-			services.AddTransient<IMeterReadingParser, CsvMeterReadingParser>();
+			services.AddTransient<IMeterReadingFileParser, CsvFileParser>();
+			services.AddTransient<IMeterReadingLineParser, CsvLineParser>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

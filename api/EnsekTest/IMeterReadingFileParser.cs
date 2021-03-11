@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EnsekTest
 {
-	public interface IMeterReadingParser
+	public interface IMeterReadingFileParser
 	{
 		List<SubmittedMeterReading> Parse(string csvContent);
 	}
