@@ -8,11 +8,15 @@ export default function Results(props) {
       <h2 className="text-xl">Upload details</h2>
       <table>
         <thead>
-          <th>Line</th>
-          <th className="text-left px-4 py-2">Content</th>
-          <th className="text-left px-4 py-2">Uploaded?</th>
+          <tr>
+            <th>Line</th>
+            <th className="text-left px-4 py-2">Content</th>
+            <th className="text-left px-4 py-2">Uploaded?</th>
+          </tr>
         </thead>
-        {results.results.map(result => <Result result={result} />)}
+        <tbody>
+          {results.results.map(result => <Result key={result.lineNumber} result={result} />)}
+        </tbody>
       </table>
     </div>
   );

@@ -15,7 +15,7 @@ export default function Home() {
   function handleUpload(e) {
     setUploadEnabled(false);
 
-    axios.post("https://ensek.gearstone.uk/api/meter-reading-uploads", csv, { headers: { "content-type": "text/csv" } })
+    axios.post(`${process.env.NEXT_PUBLIC_API}/api/meter-reading-uploads`, csv, { headers: { "content-type": "text/csv" } })
       .then(x => {
         setResults(x.data);
         setError(null);
@@ -23,18 +23,23 @@ export default function Home() {
       .catch(e => {
         setResults(null);
         setError(e);
+        setUploadEnabled(true);
       });
-  }
-
-  function handleClear(e) {
-    setError(null);
-    setResults(null);
-    setCsv("");
   }
 
   function handleCsvInput(e) {
     setUploadEnabled(e.target.value);
     setCsv(e.target.value);
+  }
+
+  function handleReset(e) {
+    if (!confirm("Do you really want to reset all the meter readings?")) return;
+
+    axios.post(`${process.env.NEXT_PUBLIC_API}/api/reset`).then(x => {
+      setError(null);
+      setResults(null);
+      setCsv("");
+    });
   }
 
   return (
@@ -55,7 +60,7 @@ export default function Home() {
               {error && <Error message={error?.message} />}
               {results && <ResultsSummary results={results} />}
             </div>
-            {results && <button onClick={handleClear} className="border border-white rounded text-white px-4 py-2">Clear</button>}
+            <button onClick={handleReset} className="border border-red-500 text-red-500 rounded px-4 py-2 flex-shrink-0">Reset database</button>
             <button disabled={!uploadEnabled} onClick={handleUpload} className="bg-ensek-orange rounded disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-4 py-2">Upload</button>
           </div>
 
