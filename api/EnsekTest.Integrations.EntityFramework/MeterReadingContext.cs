@@ -22,7 +22,7 @@ namespace EnsekTest.Integrations.EntityFramework
 			builder.Entity<Account>().Property(x => x.AccountId).ValueGeneratedNever();
 
 			builder.Entity<MeterReading>()
-				.HasKey(x => new { x.AccountId, x.MeterReadingDateTime });
+				.HasIndex(x => new { x.AccountId, x.MeterReadingDateTime });
 		}
 	}
 }
