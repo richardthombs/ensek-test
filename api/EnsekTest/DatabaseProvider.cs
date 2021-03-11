@@ -4,7 +4,6 @@ namespace EnsekTest
 	{
 		SqlServer,
 		Npgsql,
-
 		Sqlite
 	}
 }
